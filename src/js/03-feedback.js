@@ -5,6 +5,8 @@ console.log(formEl);
 const STORAGE_KEY = 'feedback-form-state';
 const formData = {};
 
+updateForm();
+
 formEl.addEventListener('input', throttle(onFormInput,500));
 formEl.addEventListener('submit', onFormSubmit);
 
@@ -30,14 +32,17 @@ function onFormSubmit(e) {
     
 };
 
-updateForm();
 
 function updateForm() {
     if (localStorage.getItem(STORAGE_KEY) === null) {
 return
     }
     const savedForm = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      formEl.elements.email.value = savedForm.email || "";
-      formEl.elements.message.value = savedForm.message || "";
+      // formEl.elements.email.value = savedForm.email || "";
+      // formEl.elements.message.value = savedForm.message || "";
+      Object.entries(savedForm).forEach(([name,value]) => {
+        formData[name] = value;
+        formEl.elements[name].value = value;
+      });
 };
 
