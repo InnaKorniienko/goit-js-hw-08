@@ -26,7 +26,7 @@ function onFormSubmit(e) {
       if (email.value === "" || message.value === "") {
         return window.alert("Please fill in all the fields!");
       };
-    console.log(`Email: ${email.value}, Message: ${message.value}`);
+    console.log({'Email': email.value, 'Message': message.value});
     formEl.reset();
     localStorage.removeItem(STORAGE_KEY);
     
